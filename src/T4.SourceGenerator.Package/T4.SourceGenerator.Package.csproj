@@ -27,7 +27,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\T4.SourceGenerator.CodeFixes\T4.SourceGenerator.CodeFixes.csproj" />
     <ProjectReference Include="..\T4.SourceGenerator\T4.SourceGenerator.csproj" />
   </ItemGroup>
 
@@ -38,7 +37,6 @@
   <Target Name="_AddAnalyzersToOutput">
     <ItemGroup>
       <TfmSpecificPackageFile Include="$(OutputPath)\T4.SourceGenerator.dll" PackagePath="analyzers/dotnet/cs" />
-      <TfmSpecificPackageFile Include="$(OutputPath)\T4.SourceGenerator.CodeFixes.dll" PackagePath="analyzers/dotnet/cs" />
     </ItemGroup>
   </Target>
 
