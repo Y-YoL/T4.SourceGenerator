@@ -1,21 +1,22 @@
 <Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <!-- https://forum.unity.com/threads/trying-to-get-example-sourcegenerator-to-work-in-2020-3-30.1263365/ -->
+    <MicrosoftCodeAnalysisVersion>4.1.0</MicrosoftCodeAnalysisVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="2.9.8" />
-    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="3.3.1" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
-    <PackageVersion Include="MSTest.TestAdapter" Version="1.3.2" />
-    <PackageVersion Include="MSTest.TestFramework" Version="1.3.2" />
-    <PackageVersion Include="Microsoft.CodeAnalysis" Version="3.3.1" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing.MSTest" Version="1.1.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing.MSTest" Version="1.1.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.CodeRefactoring.Testing.MSTest" Version="1.1.0" />
-    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.3.1" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="$(MicrosoftCodeAnalysisVersion)" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="$(MicrosoftCodeAnalysisVersion)" />
     <PackageVersion Include="Microsoft.CodeAnalysis.VisualBasic.Analyzer.Testing.MSTest" Version="1.1.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.VisualBasic.CodeFix.Testing.MSTest" Version="1.1.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.VisualBasic.CodeRefactoring.Testing.MSTest" Version="1.1.0" />
-    <PackageVersion Include="Microsoft.VSSDK.BuildTools" Version="16.8.3038" />
+    <PackageVersion Include="Microsoft.CodeAnalysis" Version="$(MicrosoftCodeAnalysisVersion)" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageVersion Include="MSTest.TestAdapter" Version="1.3.2" />
+    <PackageVersion Include="MSTest.TestFramework" Version="1.3.2" />
   </ItemGroup>
 </Project>
