@@ -1,0 +1,13 @@
+<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+
+namespace T4.SourceGenerator.Package.Test
+{
+    public partial class UnitTest
+    {
+        partial void Test(ref string value)
+        {
+            value = "generated";
+        }
+    }
+}

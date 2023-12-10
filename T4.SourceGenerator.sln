@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "T4.SourceGenerator", "src\T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "T4.SourceGenerator.Package", "src\T4.SourceGenerator.Package\T4.SourceGenerator.Package.csproj", "{19041EF5-08DC-48B2-AE3E-10E813495B2E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "T4.SourceGenerator.Test", "src\T4.SourceGenerator.Test\T4.SourceGenerator.Test.csproj", "{B39EC940-4ABA-4E40-8ACD-11C38FCD7780}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "T4.SourceGenerator.Test", "tests\T4.SourceGenerator.Test\T4.SourceGenerator.Test.csproj", "{B39EC940-4ABA-4E40-8ACD-11C38FCD7780}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1FA6F454-EE2B-4315-A287-39DE39293574}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +32,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B39EC940-4ABA-4E40-8ACD-11C38FCD7780} = {1FA6F454-EE2B-4315-A287-39DE39293574}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D3282B1-91F6-4C6B-9A50-4A4397ED8492}

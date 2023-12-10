@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
@@ -31,10 +33,35 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
 
+  test-nupkg:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - uses: actions/cache@v3
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test ./tests/T4.SourceGenerator.Package.Test/T4.SourceGenerator.Package.Test.csproj --no-build --verbosity normal
+
   pack:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
@@ -53,4 +80,4 @@ jobs:
       run: dotnet pack --no-build
     - uses: actions/upload-artifact@v3
       with:
-        path: src/T4.SourceGenerator.Package/bin/Release/*.nupkg
+        path: artifacts/package/release/*.nupkg

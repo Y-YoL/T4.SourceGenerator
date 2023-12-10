@@ -8,18 +8,16 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageId>T4.SourceGenerator</PackageId>
-    <PackageVersion>1.0.0.0</PackageVersion>
-    <Authors>Y_sad</Authors>
-    <PackageLicenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</PackageLicenseUrl>
-    <PackageProjectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</PackageProjectUrl>
-    <PackageIconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</PackageIconUrl>
-    <RepositoryUrl>http://REPOSITORY_URL_HERE_OR_DELETE_THIS_LINE</RepositoryUrl>
+    <PackageId>YoL.T4.SourceGenerator</PackageId>
+    <Authors>YoL</Authors>
+    <PackageLicenseUrl>https://github.com/Y-YoL/T4.SourceGenerator/blob/main/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Y-YoL/T4.SourceGenerator</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Y-YoL/T4.SourceGenerator</RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Description>T4.SourceGenerator</Description>
+    <Description>mono/t4 SourceGenerator</Description>
     <PackageReleaseNotes>Summary of changes made in this release of the package.</PackageReleaseNotes>
     <Copyright>Copyright</Copyright>
-    <PackageTags>T4.SourceGenerator, analyzers</PackageTags>
+    <PackageTags>T4, SourceGenerator, analyzers</PackageTags>
     <DevelopmentDependency>true</DevelopmentDependency>
     <NoPackageAnalysis>true</NoPackageAnalysis>
 
