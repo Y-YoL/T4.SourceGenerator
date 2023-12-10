@@ -16,6 +16,6 @@ public partial class T4SourceGenerator : IIncrementalGenerator
             ref filename,
             out var content);
 
-        context.AddSource(filename, content);
+        context.AddSource(Path.ChangeExtension(source.Path, ".g" + filename), content);
     }
 }
