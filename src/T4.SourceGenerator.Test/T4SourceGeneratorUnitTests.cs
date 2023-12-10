@@ -1,13 +1,13 @@
-﻿using Xunit;
+﻿using Microsoft.CodeAnalysis.Testing;
+using Xunit;
 using VerifyCS = T4.SourceGenerator.Test.Verifiers.CSharpSourceGeneratorVerifier<T4.SourceGenerator.T4SourceGenerator>;
 
 namespace T4.SourceGenerator.Test;
 
 public class T4SourceGeneratorUnitTest
 {
-    //No diagnostics expected to show up
     [Fact]
-    public async Task TestMethod1()
+    public async Task GenerateSource()
     {
         string testSource = """
 <#@ template debug="false" hostspecific="false" language="C#" #>
@@ -48,6 +48,35 @@ namespace Sample
                 GeneratedSources =
                 {
                     (typeof(T4.SourceGenerator.T4SourceGenerator), "a.g.cs", expected)
+                },
+            },
+        }.RunAsync();
+    }
+
+    [Fact]
+    public async Task HasError()
+    {
+        string testSource = """
+<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+
+<# string error = 0; #>
+class A {}
+""";
+
+        await new VerifyCS.Test
+        {
+            TestState =
+            {
+                AdditionalFiles =
+                {
+                    ("a.tt", testSource),
+                },
+                ExpectedDiagnostics =
+                {
+                    DiagnosticResult.CompilerError("CS0029")
+                        .WithSpan("a.tt", 4, 17, 4, 17)
+                        .WithMessage(null),
                 },
             },
         }.RunAsync();
