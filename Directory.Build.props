@@ -6,7 +6,7 @@
     <UseArtifactsOutput>true</UseArtifactsOutput>
 
     <Authors>YoL</Authors>
-    <PackageLicenseUrl>https://github.com/Y-YoL/T4.SourceGenerator/blob/main/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Y-YoL/T4.SourceGenerator</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Y-YoL/T4.SourceGenerator</RepositoryUrl>
   </PropertyGroup>

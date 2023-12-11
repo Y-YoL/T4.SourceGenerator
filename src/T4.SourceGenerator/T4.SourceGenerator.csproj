@@ -14,15 +14,12 @@
     <AnalyzerLanguage>cs</AnalyzerLanguage>
 
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_AddAnalyzersToOutput</TargetsForTfmSpecificContentInPackage>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
-    <PackageReference Include="Mono.TextTemplating" PrivateAssets="all" />
+    <PackageReference Include="Mono.TextTemplating" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,9 +29,10 @@
 
   <Target Name="_AddAnalyzersToOutput" DependsOnTargets="ResolveProjectReferences;SatelliteDllsProjectOutputGroup;SatelliteDllsProjectOutputGroupDependencies">
     <ItemGroup>
-      <TfmSpecificPackageFile Include="$(TargetPath)" PackagePath="analyzers/cs" />
-      <TfmSpecificPackageFile Include="$(TargetDir)/System.CodeDom.dll" PackagePath="analyzers/cs" />
-      <TfmSpecificPackageFile Include="$(TargetDir)/Mono.TextTemplating.dll" PackagePath="analyzers/cs" />
+      <TfmSpecificPackageFile Include="$(TargetPath)" PackagePath="analyzers/dotnet/cs" />
+      <TfmSpecificPackageFile Include="$(TargetDir)/System.CodeDom.dll" PackagePath="analyzers/dotnet/cs" />
+      <TfmSpecificPackageFile Include="$(TargetDir)/System.Collections.Immutable.dll" PackagePath="analyzers/dotnet/cs" />
+      <TfmSpecificPackageFile Include="$(TargetDir)/Mono.TextTemplating.dll" PackagePath="analyzers/dotnet/cs" />
     </ItemGroup>
   </Target>
 
