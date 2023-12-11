@@ -84,7 +84,7 @@ jobs:
         name: nupkg
         path: artifacts/package
     - name: Restore dependencies
-      run: dotnet restore $CSPROJ_PATH
+      run: dotnet restore $CSPROJ_PATH --verbosity normal
     - name: Build
       run: dotnet build $CSPROJ_PATH --no-restore
     - name: Test

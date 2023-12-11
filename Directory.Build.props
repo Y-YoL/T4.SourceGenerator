@@ -4,6 +4,11 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseArtifactsOutput>true</UseArtifactsOutput>
+
+    <Authors>YoL</Authors>
+    <PackageLicenseUrl>https://github.com/Y-YoL/T4.SourceGenerator/blob/main/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Y-YoL/T4.SourceGenerator</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Y-YoL/T4.SourceGenerator</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

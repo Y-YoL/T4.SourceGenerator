@@ -2,10 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <IsPackable>false</IsPackable>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IsPackable>true</IsPackable>
 
-    <!-- Avoid ID conflicts with the package project. -->
-    <PackageId>*$(MSBuildProjectFile)*</PackageId>
+    <Title>mono/t4 SourceGenerator</Title>
+    <PackageId>YoL.T4.SourceGenerator</PackageId>
+    <Description>t4 SourceGenerator</Description>
+    <PackageTags>T4, SourceGenerator, analyzers</PackageTags>
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <AnalyzerLanguage>cs</AnalyzerLanguage>
+
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_AddAnalyzersToOutput</TargetsForTfmSpecificContentInPackage>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,12 +22,20 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
-    <PackageReference Include="Mono.TextTemplating" />
+    <PackageReference Include="Mono.TextTemplating" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Resources.Designer.cs" DesignTime="True" AutoGen="True" DependentUpon="Resources.resx" />
     <EmbeddedResource Update="Resources.resx" Generator="ResXFileCodeGenerator" LastGenOutput="Resources.Designer.cs" />
   </ItemGroup>
+
+  <Target Name="_AddAnalyzersToOutput" DependsOnTargets="ResolveProjectReferences;SatelliteDllsProjectOutputGroup;SatelliteDllsProjectOutputGroupDependencies">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="$(TargetPath)" PackagePath="analyzers/cs" />
+      <TfmSpecificPackageFile Include="$(TargetDir)/System.CodeDom.dll" PackagePath="analyzers/cs" />
+      <TfmSpecificPackageFile Include="$(TargetDir)/Mono.TextTemplating.dll" PackagePath="analyzers/cs" />
+    </ItemGroup>
+  </Target>
 
 </Project>
