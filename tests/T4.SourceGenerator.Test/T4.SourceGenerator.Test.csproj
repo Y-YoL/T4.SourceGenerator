@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\T4.SourceGenerator\T4.SourceGenerator.csproj" />
+    <ProjectReference Include="..\..\src\T4.SourceGenerator\T4.SourceGenerator.csproj" />
   </ItemGroup>
 
 </Project>

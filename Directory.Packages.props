@@ -11,6 +11,8 @@
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing" Version="1.1.1" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
     <PackageVersion Include="Mono.TextTemplating" Version="2.2.1" />
+    <PackageVersion Include="Nerdbank.GitVersioning" Version="3.6.133" />
+    <PackageVersion Include="System.CodeDom" Version="4.4.0" />
     <PackageVersion Include="xunit" Version="2.6.3" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.5" />
   </ItemGroup>

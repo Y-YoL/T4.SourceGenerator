@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
@@ -35,6 +37,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
@@ -53,4 +57,33 @@ jobs:
       run: dotnet pack --no-build
     - uses: actions/upload-artifact@v3
       with:
-        path: src/T4.SourceGenerator.Package/bin/Release/*.nupkg
+        name: nupkg
+        path: artifacts/package/release/*.nupkg
+
+  test-nupkg:
+    needs: pack
+    runs-on: ubuntu-latest
+    env:
+      CSPROJ_PATH: ./tests/T4.SourceGenerator.Package.Test/T4.SourceGenerator.Package.Test.csproj
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - uses: actions/cache/restore@v3
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+    - uses: actions/download-artifact@v3
+      with:
+        name: nupkg
+        path: artifacts/package
+    - name: Restore dependencies
+      run: dotnet restore $CSPROJ_PATH --verbosity normal
+    - name: Build
+      run: dotnet build $CSPROJ_PATH --no-restore
+    - name: Test
+      run: dotnet test $CSPROJ_PATH --no-build --verbosity normal

@@ -2,6 +2,7 @@
 
 namespace T4.SourceGenerator;
 
+[Generator(LanguageNames.CSharp)]
 public partial class T4SourceGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)

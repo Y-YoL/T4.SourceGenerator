@@ -2,17 +2,27 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <IsPackable>false</IsPackable>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IsPackable>true</IsPackable>
+    <IncludeSymbols>false</IncludeSymbols>
+    <DevelopmentDependency>true</DevelopmentDependency>
 
-    <!-- Avoid ID conflicts with the package project. -->
-    <PackageId>*$(MSBuildProjectFile)*</PackageId>
+    <Title>mono/t4 SourceGenerator</Title>
+    <PackageId>YoL.T4.SourceGenerator</PackageId>
+    <Description>t4 SourceGenerator</Description>
+    <PackageTags>T4, SourceGenerator, analyzers</PackageTags>
+    <AnalyzerLanguage>cs</AnalyzerLanguage>
+
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
   </PropertyGroup>
 
+  <ItemDefinitionGroup>
+    <PackageReference PrivateAssets="all" GeneratePathProperty="true" />
+  </ItemDefinitionGroup>
+
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
     <PackageReference Include="Mono.TextTemplating" />
   </ItemGroup>
@@ -21,5 +31,18 @@
     <Compile Update="Resources.Designer.cs" DesignTime="True" AutoGen="True" DependentUpon="Resources.resx" />
     <EmbeddedResource Update="Resources.resx" Generator="ResXFileCodeGenerator" LastGenOutput="Resources.Designer.cs" />
   </ItemGroup>
+
+  <ItemGroup>
+      <None Include="$(TargetPath)" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+      <None Include="$(TargetDir)\System.CodeDom.dll" PackagePath="analyzers/dotnet/cs" Visible="false" />
+      <None Include="$(TargetDir)\Mono.TextTemplating.dll" PackagePath="analyzers/dotnet/cs" Visible="false" />
+  </ItemGroup>
+
+  <Target Name="GetDependencyTargetPaths">
+    <ItemGroup>
+      <TargetPathWithTargetPlatformMoniker Include="$(TargetDir)\System.CodeDom.dll" IncludeRuntimeDependency="false" />
+      <TargetPathWithTargetPlatformMoniker Include="$(TargetDir)\Mono.TextTemplating.dll" IncludeRuntimeDependency="false" />
+    </ItemGroup>
+  </Target>
 
 </Project>
