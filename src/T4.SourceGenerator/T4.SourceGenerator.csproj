@@ -4,15 +4,17 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <IsPackable>true</IsPackable>
+    <IncludeSymbols>false</IncludeSymbols>
+    <DevelopmentDependency>true</DevelopmentDependency>
 
     <Title>mono/t4 SourceGenerator</Title>
     <PackageId>YoL.T4.SourceGenerator</PackageId>
     <Description>t4 SourceGenerator</Description>
     <PackageTags>T4, SourceGenerator, analyzers</PackageTags>
-    <DevelopmentDependency>true</DevelopmentDependency>
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <AnalyzerLanguage>cs</AnalyzerLanguage>
 
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);PackBuildOutputs</TargetsForTfmSpecificContentInPackage>
+    <GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
     <NoWarn>$(NoWarn);NU5128</NoWarn>
   </PropertyGroup>
 
@@ -27,14 +29,27 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-    <None Include="$(PkgMono_TextTemplating)\lib\netstandard2.0\*.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-    <None Include="$(PkgSystem_CodeDom)\lib\netstandard2.0\*.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Resources.Designer.cs" DesignTime="True" AutoGen="True" DependentUpon="Resources.resx" />
     <EmbeddedResource Update="Resources.resx" Generator="ResXFileCodeGenerator" LastGenOutput="Resources.Designer.cs" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
+  </PropertyGroup>
+
+  <Target Name="GetDependencyTargetPaths">
+    <ItemGroup>
+      <TargetPathWithTargetPlatformMoniker Include="$(PkgMono_TextTemplating)\lib\netstandard2.0\*.dll" IncludeRuntimeDependency="false" />
+      <TargetPathWithTargetPlatformMoniker Include="$(PkgSystem_CodeDom)\lib\netstandard2.0\*.dll" IncludeRuntimeDependency="false" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="PackBuildOutputs">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="$(TargetPath)" PackagePath="analyzers/dotnet/cs" />
+      <TfmSpecificPackageFile Include="$(PkgMono_TextTemplating)\lib\netstandard2.0\*.dll" PackagePath="analyzers/dotnet/cs" />
+      <TfmSpecificPackageFile Include="$(PkgSystem_CodeDom)\lib\netstandard2.0\*.dll" PackagePath="analyzers/dotnet/cs" />
+    </ItemGroup>
+  </Target>
 
 </Project>
